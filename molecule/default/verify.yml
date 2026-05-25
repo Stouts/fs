@@ -1,0 +1,26 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Check test directory exists
+      ansible.builtin.stat:
+        path: /tmp/fs-test-dir
+      register: test_dir
+
+    - name: Assert directory was created
+      ansible.builtin.assert:
+        that:
+          - test_dir.stat.exists
+          - test_dir.stat.isdir
+
+    - name: Check test file exists
+      ansible.builtin.stat:
+        path: /tmp/fs-test-file.txt
+      register: test_file
+
+    - name: Assert file was created with correct mode
+      ansible.builtin.assert:
+        that:
+          - test_file.stat.exists
+          - test_file.stat.isreg
