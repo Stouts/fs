@@ -15,7 +15,7 @@
     mode: "{{ item.mode|default(omit) }}"
     force: "{{ item.force|default(omit) }}"
   notify: "{{ item.notify|default(omit) }}"
-  loop: "{{ (fs_global_copy + fs_copy) | rejectattr('template') | list }}"
+  loop: "{{ (fs_global_copy + fs_copy) | rejectattr('template', 'defined') | list }}"
 
 - name: Copy files (templates)
   template:
@@ -26,4 +26,4 @@
     mode: "{{ item.mode|default(omit) }}"
     force: "{{ item.force|default(omit) }}"
   notify: "{{ item.notify|default(omit) }}"
-  loop: "{{ (fs_global_copy + fs_copy) | selectattr('template') | list }}"
+  loop: "{{ (fs_global_copy + fs_copy) | selectattr('template', 'defined') | list }}"
