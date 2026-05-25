@@ -6,3 +6,6 @@ fs_copy: []
 fs_global_dirs: []
 fs_global_copy: []
 
+fs_remove: []
+fs_global_remove: []
+

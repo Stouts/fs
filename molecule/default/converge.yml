@@ -6,10 +6,16 @@
   vars:
     fs_dirs:
       - /tmp/fs-test-dir
+      - /tmp/fs-to-remove-dir
     fs_copy:
       - dest: /tmp/fs-test-file.txt
         content: "Hello from Stouts.fs"
         mode: '0644'
+      - dest: /tmp/fs-to-remove-file.txt
+        content: "bye"
+    fs_remove:
+      - /tmp/fs-to-remove-file.txt
+      - /tmp/fs-to-remove-dir
 
   roles:
     - role: fs

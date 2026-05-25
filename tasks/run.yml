@@ -27,3 +27,9 @@
     force: "{{ item.force|default(omit) }}"
   notify: "{{ item.notify|default(omit) }}"
   loop: "{{ (fs_global_copy + fs_copy) | selectattr('template', 'defined') | list }}"
+
+- name: Remove files/directories
+  ansible.builtin.file:
+    path: "{{ item.path | default(item) }}"
+    state: absent
+  loop: "{{ fs_global_remove | union(fs_remove) }}"

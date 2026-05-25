@@ -19,3 +19,16 @@ provisioner:
     ANSIBLE_ROLES_PATH: "../../.."
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+scenario:
+  test_sequence:
+    - dependency
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    - prepare
+    - converge
+    - side_effect
+    - verify
+    - cleanup
+    - destroy

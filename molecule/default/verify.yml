@@ -24,3 +24,23 @@
         that:
           - test_file.stat.exists
           - test_file.stat.isreg
+
+    - name: Check removed file does not exist
+      ansible.builtin.stat:
+        path: /tmp/fs-to-remove-file.txt
+      register: removed_file
+
+    - name: Assert removed file was deleted
+      ansible.builtin.assert:
+        that:
+          - not removed_file.stat.exists
+
+    - name: Check removed dir does not exist
+      ansible.builtin.stat:
+        path: /tmp/fs-to-remove-dir
+      register: removed_dir
+
+    - name: Assert removed directory was deleted
+      ansible.builtin.assert:
+        that:
+          - not removed_dir.stat.exists
