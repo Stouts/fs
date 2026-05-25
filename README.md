@@ -1,7 +1,7 @@
 Stouts.fs
 =========
 
-[![CI](https://github.com/Stouts/Stouts.fs/actions/workflows/ci.yml/badge.svg)](https://github.com/Stouts/Stouts.fs/actions/workflows/ci.yml)
+[![CI](https://github.com/Stouts/fs/actions/workflows/ci.yml/badge.svg)](https://github.com/Stouts/fs/actions/workflows/ci.yml)
 
 Ansible role which helps you with filesystem tasks:
 
