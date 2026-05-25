@@ -1,0 +1,29 @@
+---
+- name: Create directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+  loop: "{{ fs_global_dirs | union(fs_dirs) }}"
+
+- name: Copy files (raw)
+  copy:
+    dest: "{{ item.dest|default(omit) }}"
+    src: "{{ item.src|default(omit) }}"
+    content: "{{ item.content|default(omit) }}"
+    group: "{{ item.group|default(omit) }}"
+    owner: "{{ item.owner|default(omit) }}"
+    mode: "{{ item.mode|default(omit) }}"
+    force: "{{ item.force|default(omit) }}"
+  notify: "{{ item.notify|default(omit) }}"
+  loop: "{{ (fs_global_copy + fs_copy) | rejectattr('template') | list }}"
+
+- name: Copy files (templates)
+  template:
+    dest: "{{ item.dest|default(omit) }}"
+    src: "{{ item.template }}"
+    group: "{{ item.group|default(omit) }}"
+    owner: "{{ item.owner|default(omit) }}"
+    mode: "{{ item.mode|default(omit) }}"
+    force: "{{ item.force|default(omit) }}"
+  notify: "{{ item.notify|default(omit) }}"
+  loop: "{{ (fs_global_copy + fs_copy) | selectattr('template') | list }}"
